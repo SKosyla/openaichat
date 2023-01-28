@@ -142,7 +142,6 @@ const handleSubmit = async (e) => {
             prompt: data.get('prompt')
         })
     })
-}
 
     clearInterval(loadInterval)
     messageDiv.innerHTML = " "
@@ -158,6 +157,7 @@ const handleSubmit = async (e) => {
         messageDiv.innerHTML = "Something went wrong"
         alert(err)
     }
+}
 
 
 form.addEventListener('submit', handleSubmit)
