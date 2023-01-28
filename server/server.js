@@ -2,7 +2,7 @@ import express from 'express';
 import * as dotenv from 'dotenv';
 import cors from 'cors';
 import session from 'express';
-import { json, urlencoded } from 'body-parser';
+import pkg from 'body-parser';
 import { Configuration, OpenAIApi } from 'openai';
 
 dotenv.config();
