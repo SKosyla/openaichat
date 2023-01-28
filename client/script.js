@@ -62,6 +62,14 @@ function chatStripe(isAi, value, uniqueId) {
     )
 }
 
+if(location.pathname === '/login') {
+    document.getElementById("login-form").style.display = "block";
+    document.getElementById("app").style.display = "none";
+  } else {
+    document.getElementById("login-form").style.display = "none";
+    document.getElementById("app").style.display = "block";
+  }
+
 const handleSubmit = async (e) => {
     e.preventDefault()
 
