@@ -1,7 +1,6 @@
 import express from 'express';
 import * as dotenv from 'dotenv';
 import cors from 'cors';
-import session from 'express';
 import pkg from 'body-parser';
 import { Configuration, OpenAIApi } from 'openai';
 
