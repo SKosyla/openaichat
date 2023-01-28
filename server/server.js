@@ -1,9 +1,11 @@
-import express from 'express'
-import * as dotenv from 'dotenv'
-import cors from 'cors'
-import { Configuration, OpenAIApi } from 'openai'
+import express from 'express';
+import * as dotenv from 'dotenv';
+import cors from 'cors';
+import session from 'express-session';
+import { json, urlencoded } from 'body-parser';
+import { Configuration, OpenAIApi } from 'openai';
 
-dotenv.config()
+dotenv.config();
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -11,9 +13,11 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-const app = express()
-app.use(cors())
-app.use(express.json())
+const app = express();
+app.use(cors());
+app.use(json());
+app.use(urlencoded({ extended: true }));
+app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}));
 
 const users = [{username: "admin", password: "password"}]; // In-memory storage of users
 
@@ -23,7 +27,7 @@ app.get('/', (req, res) => {
             message: 'Hello from CodeX!',
         });
     } else {
-        res.redirect('/login')
+        res.redirect('/login');
     }
 });
 
