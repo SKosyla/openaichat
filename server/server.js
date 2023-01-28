@@ -2,6 +2,7 @@ import express from 'express';
 import * as dotenv from 'dotenv';
 import cors from 'cors';
 import pkg from 'body-parser';
+import session from 'express-session';
 import { Configuration, OpenAIApi } from 'openai';
 
 dotenv.config();
@@ -13,7 +14,6 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 const app = express();
-const session = require('express-session');
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
