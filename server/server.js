@@ -23,7 +23,7 @@ app.get('/', (req, res) => {
             message: 'Hello from CodeX!',
         });
     } else {
-        res.redirect('/login.html')
+        res.redirect('/login')
     }
 });
 
@@ -54,7 +54,7 @@ app.post('/', async (req, res) => {
     }
 });
 
-app.post('/login.html', (req, res) => {
+app.post('/login', (req, res) => {
     const {username, password} = req.body;
 
     // check if the input values match the correct credentials
@@ -69,7 +69,7 @@ app.post('/login.html', (req, res) => {
 
 app.get('/logout', (req, res) => {
     req.session.destroy();
-    res.redirect('/login.html');
+    res.redirect('/login');
 });
 
 app.listen(5000, () => console.log('AI server started on https://openaichat-fvp3.onrender.com'))

@@ -68,7 +68,7 @@ const handleSubmit = async (e) => {
     if(e.target.id === "login-form"){
         const data = new FormData(loginForm)
         // send data to server for login check
-        const response = await fetch('https://openaichat-fvp3.onrender.com/login.html', {
+        const response = await fetch('https://openaichat-fvp3.onrender.com/login', {
             method: 'POST',
             body: data
         })

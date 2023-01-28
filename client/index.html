@@ -9,6 +9,17 @@
   </head>
   <body>
     <div id="app">
+      <div id="login-form">
+        <form>
+          <label for="username">Username:</label>
+          <input type="username" id="username" name="username" required>
+          <br>
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required>
+          <br>
+          <input type="submit" value="Submit">
+        </form>
+      </div>
       <div id="chat_container"></div>
       <form>
         <textarea name="prompt" rows="1" cols="1" placeholder="Ask codex..."></textarea>
