@@ -62,45 +62,57 @@ function chatStripe(isAi, value, uniqueId) {
     )
 }
 
-if(location.pathname === '/login') {
-    document.getElementById("login-form").style.display = "block";
-  } else {
-    document.getElementById("login-form").style.display = "none";
-  }
-
 const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const data = new FormData(form)
-
-    // user's chatstripe
-    chatContainer.innerHTML += chatStripe(false, data.get('prompt'))
-
-    // to clear the textarea input 
-    form.reset()
-
-    // bot's chatstripe
-    const uniqueId = generateUniqueId()
-    chatContainer.innerHTML += chatStripe(true, " ", uniqueId)
-
-    // to focus scroll to the bottom 
-    chatContainer.scrollTop = chatContainer.scrollHeight;
-
-    // specific message div 
-    const messageDiv = document.getElementById(uniqueId)
-
-    // messageDiv.innerHTML = "..."
-    loader(messageDiv)
-
-    const response = await fetch('https://openaichat-fvp3.onrender.com', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            prompt: data.get('prompt')
+    if(e.target.id === "login-form"){
+        const data = new FormData(loginForm)
+        // send data to server for login check
+        const response = await fetch('https://openaichat-fvp3.onrender.com/login.html', {
+            method: 'POST',
+            body: data
         })
-    })
+        const json = await response.json();
+        if(json.success){
+            // show the chat form
+            form.style.display = "block";
+        }else{
+            // show error message on login-form 
+            loginForm.querySelector("#error").textContent = json.message
+        }
+    }else{
+
+        const data = new FormData(form)
+
+        // user's chatstripe
+        chatContainer.innerHTML += chatStripe(false, data.get('prompt'))
+
+        // to clear the textarea input 
+        form.reset()
+
+        // bot's chatstripe
+        const uniqueId = generateUniqueId()
+        chatContainer.innerHTML += chatStripe(true, " ", uniqueId)
+
+        // to focus scroll to the bottom 
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+
+        // specific message div 
+        const messageDiv = document.getElementById(uniqueId)
+
+        // messageDiv.innerHTML = "..."
+        loader(messageDiv)
+
+        const response = await fetch('https://openaichat-fvp3.onrender.com', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                prompt: data.get('prompt')
+            })
+        })
+    }
 
     clearInterval(loadInterval)
     messageDiv.innerHTML = " "
