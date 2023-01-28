@@ -1,7 +1,7 @@
 import express from 'express';
 import * as dotenv from 'dotenv';
 import cors from 'cors';
-import session from 'express-session';
+import session from 'express';
 import pkg from 'body-parser';
 import { Configuration, OpenAIApi } from 'openai';
 
@@ -14,10 +14,11 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 const app = express();
+const session = require('express-session');
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}));
+app.use(session({ secret: 'keyboard cat', resave: false, saveUninitialized: true, cookie: { maxAge: 60000 }}));
 
 const users = [{username: "admin", password: "password"}]; // In-memory storage of users
 
