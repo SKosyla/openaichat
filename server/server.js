@@ -58,6 +58,14 @@ app.post('/', async (req, res) => {
     }
 });
 
+app.get('/login', (req, res) => {
+  res.send('<form method="post" action="/login">' +
+    'Username: <input type="text" name="username"><br>' +
+    'Password: <input type="password" name="password"><br>' +
+    '<input type="submit" value="Log In">' +
+    '</form>');
+});
+
 app.post('/login', (req, res) => {
     const {username, password} = req.body;
 
