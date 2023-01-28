@@ -76,4 +76,4 @@ app.get('/logout', (req, res) => {
     res.redirect('/login');
 });
 
-app.listen(5000, () => console.log('AI server started on https://openaichat-fvp3.onrender.com'))
+app.listen(5000, () => console.log('AI server started on http://localhost:5000'))
