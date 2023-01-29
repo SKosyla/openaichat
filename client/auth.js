@@ -15,6 +15,6 @@ class Auth {
 
 	logOut() {
 		localStorage.removeItem("auth");
-		window.location.replace("/");
+		window.location.replace("/login");
 	}
 }
