@@ -10,6 +10,10 @@ const configuration = new Configuration({
 });
 
 const openai = new OpenAIApi(configuration);
+const bodyParser = require('body-parser');
+const users = [
+  {username: "admin", password: "password"}
+];
 
 const app = express()
 app.use(cors())
@@ -44,5 +48,17 @@ app.post('/', async (req, res) => {
     res.status(500).send(error || 'Something went wrong');
   }
 })
+
+app.post('/login', (req, res) => {
+  const {username, password} = req.body;
+
+  // check if the input values match the correct credentials
+  const user = users.find(u => u.username === username && u.password === password);
+  if (user) {
+      res.json({message: "ok"});
+  } else {
+      res.json({message: "Invalid username or password. Please try again."});
+  }
+});
 
 app.listen(5000, () => console.log('AI server started on https://openaichat-fvp3.onrender.com'))
