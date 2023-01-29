@@ -7,7 +7,7 @@ class Auth {
 
 	validateAuth(auth) {
 		if (auth != 1) {
-			window.location.replace("/login");
+			window.location.replace("/");
 		} else {
             document.querySelector("body").style.display = "block";
 		}
@@ -15,6 +15,6 @@ class Auth {
 
 	logOut() {
 		localStorage.removeItem("auth");
-		window.location.replace("/login");
+		window.location.replace("/");
 	}
 }
