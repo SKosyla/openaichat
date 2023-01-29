@@ -62,6 +62,53 @@ function chatStripe(isAi, value, uniqueId) {
     )
 }
 
+// client-side login function
+function login(username, password) {
+    // create a JSON object with the username and password
+    const user = { username, password };
+
+    // make a POST request to the server's '/login' endpoint with the data as the request body
+  fetch('https://openaichat-fvp3.onrender.com/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(user),
+  })
+    .then((res) => {
+      if (res.ok) {
+        // if the response is OK, the login was successful
+        return res.json();
+      } else {
+        // if the response is not OK, the login was unsuccessful
+        throw new Error('Invalid username or password');
+      }
+    })
+    .then((user) => {
+      // the server's response is passed to this callback
+      console.log(user);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+//example login form validation
+function validateLogin() {
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    if (!username) {
+      alert("Please enter a username");
+      return;
+    }
+
+    if (!password) {
+      alert("Please enter a password");
+      return;
+    }
+
+    login(username, password);
+}
+
 const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -86,7 +133,7 @@ const handleSubmit = async (e) => {
     // messageDiv.innerHTML = "..."
     loader(messageDiv)
 
-    const response = await fetch('https://openaichat-fvp3.onrender.com', {
+    const response = await fetch('https://codex-im0y.onrender.com/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -111,6 +158,7 @@ const handleSubmit = async (e) => {
         alert(err)
     }
 }
+
 
 form.addEventListener('submit', handleSubmit)
 form.addEventListener('keyup', (e) => {

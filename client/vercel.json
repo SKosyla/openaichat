@@ -1,6 +1,0 @@
-{
-    "cleanUrls": true,
-    "redirects": [
-      { "source": "/chat", "destination": "/chat/chat.html" },
-      { "source": "/view-source", "destination": "https://github.com/vercel/vercel" }
-}
