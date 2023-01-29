@@ -10,7 +10,6 @@ const configuration = new Configuration({
 });
 
 const openai = new OpenAIApi(configuration);
-const bodyParser = require('body-parser');
 const users = [
   {username: "admin", password: "password"}
 ];
